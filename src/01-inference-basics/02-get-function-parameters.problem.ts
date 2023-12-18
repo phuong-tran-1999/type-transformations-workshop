@@ -11,7 +11,9 @@ const makeQuery = (
   },
 ) => {};
 
-type MakeQueryParameters = unknown;
+type MakeQueryParameters = Parameters<typeof makeQuery>;
+type MakeQueryOptsParameters = MakeQueryParameters[1];
+type MakeQueryUrlParameters = MakeQueryParameters[0];
 
 type tests = [
   Expect<
@@ -25,8 +27,24 @@ type tests = [
             [key: string]: string;
           };
           body?: string;
-        },
+        }
       ]
     >
   >,
+
+  Expect<
+    Equal<
+      MakeQueryOptsParameters,
+      | {
+          method?: string;
+          headers?: {
+            [key: string]: string;
+          };
+          body?: string;
+        }
+      | undefined
+    >
+  >,
+
+  Expect<Equal<MakeQueryUrlParameters, string>>
 ];
