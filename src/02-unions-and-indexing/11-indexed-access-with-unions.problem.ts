@@ -9,7 +9,14 @@ export const programModeEnumMap = {
   PLANNED_SELF_DIRECTED: "plannedSelfDirected",
 } as const;
 
-export type IndividualProgram = unknown;
+export type ProgramMode = typeof programModeEnumMap;
+export type ProgramModeKey = keyof ProgramMode;
+export type IndividualProgramModeKey = Exclude<
+  ProgramModeKey,
+  "GROUP" | "ANNOUNCEMENT"
+>;
+
+export type IndividualProgram = ProgramMode[IndividualProgramModeKey];
 
 type tests = [
   Expect<
@@ -17,5 +24,5 @@ type tests = [
       IndividualProgram,
       "1on1" | "selfDirected" | "planned1on1" | "plannedSelfDirected"
     >
-  >,
+  >
 ];
