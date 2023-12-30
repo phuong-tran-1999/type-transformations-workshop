@@ -14,6 +14,6 @@
     "skipLibCheck": true
   },
   "include": [
-    "C:/totaltypescript/type-transformations-workshop/src/03-template-literals/14-template-literal-with-string.problem.ts"
+    "C:/totaltypescript/type-transformations-workshop/src/03.5-type-helpers-pattern/20-type-helpers-pattern.problem.ts"
   ]
 }
