@@ -1,19 +1,14 @@
-import { Equal, Expect } from "../helpers/type-utils";
+import { Equal, Expect } from '../helpers/type-utils';
 
 interface MyComplexInterface<Event, Context, Name, Point> {
-  getEvent: () => Event;
-  getContext: () => Context;
-  getName: () => Name;
-  getPoint: () => Point;
+	getEvent: () => Event;
+	getContext: () => Context;
+	getName: () => Name;
+	getPoint: () => Point;
 }
 
-type Example = MyComplexInterface<
-  "click",
-  "window",
-  "my-event",
-  { x: 12; y: 14 }
->;
+type Example = MyComplexInterface<'click', 'window', 'my-event', { x: 12; y: 14 }>;
 
-type GetPoint<T> = unknown;
+type GetPoint<T> = T extends MyComplexInterface<infer E, infer C, infer N, infer P> ? P : never;
 
 type tests = [Expect<Equal<GetPoint<Example>, { x: 12; y: 14 }>>];
